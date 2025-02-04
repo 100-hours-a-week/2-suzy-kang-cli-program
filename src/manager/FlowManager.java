@@ -6,11 +6,11 @@ import java.util.Scanner;
 import surveys.Survey;
 
 public class FlowManager {
+    public boolean isRunning = true;
+
     private final Scanner scanner = new Scanner(System.in);
     private final List<Survey> surveyList;
     private final int surveyLength;
-    
-    public boolean isRunning = true;
 
     public FlowManager(List<Survey> surveyList) {
         this.surveyList = surveyList;
