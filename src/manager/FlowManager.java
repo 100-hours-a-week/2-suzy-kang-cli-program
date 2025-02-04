@@ -52,7 +52,7 @@ public class FlowManager {
         int selectedOption = getValidAnswer(TOTAL_MENU_OPTIONS);
 
         if(isExitSelectedMenu(selectedOption)) {
-            displayExit();
+            programExit();
             return;
         }
 
@@ -72,7 +72,7 @@ public class FlowManager {
         int selectedOption = getValidAnswer(2);
 
         if(selectedOption ==2) {
-            displayExit();
+            programExit();
         }
     }
 
@@ -80,7 +80,7 @@ public class FlowManager {
         System.out.println("---------------------------------------");
     }
 
-    private void displayExit() {
+    private void programExit() {
         System.out.println("\uD83D\uDC4B\uD83C\uDFFB 프로그램을 종료합니다.");
         isRunning = false;
         System.exit(0);
