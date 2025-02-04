@@ -8,13 +8,13 @@ import surveys.Survey;
 public class FlowManager {
     private final Scanner scanner = new Scanner(System.in);
     private final List<Survey> surveyList;
-    private final int surveylength;
+    private final int surveyLength;
     
     public boolean isRunning = true;
 
     public FlowManager(List<Survey> surveyList) {
         this.surveyList = surveyList;
-        this.surveylength = surveyList.size();
+        this.surveyLength = surveyList.size();
     }
 
     public void displayOpening(){
@@ -31,9 +31,9 @@ public class FlowManager {
         displayLine();
         System.out.print("⭐심리 탐험 메뉴⭐\n\n");
 
-        for (int i=0; i <= surveylength; i++) {
+        for (int i = 0; i <= surveyLength; i++) {
             int menuOption = i+1;
-            if (surveylength == i) {
+            if (surveyLength == i) {
                 System.out.println(menuOption +". 종료");
                 break;
             }
@@ -48,7 +48,7 @@ public class FlowManager {
 
     public void play() {
         final int MENU_EXIT_OPTION = 1;
-        final int TOTAL_MENU_OPTIONS = surveylength + MENU_EXIT_OPTION;
+        final int TOTAL_MENU_OPTIONS = surveyLength + MENU_EXIT_OPTION;
         int selectedOption = getValidAnswer(TOTAL_MENU_OPTIONS);
 
         if(isExitSelectedMenu(selectedOption)) {
@@ -103,7 +103,7 @@ public class FlowManager {
     }
 
     private boolean isExitSelectedMenu(int selectedOption) {
-        return selectedOption - 1 == surveylength;
+        return selectedOption - 1 == surveyLength;
     }
 
 }
