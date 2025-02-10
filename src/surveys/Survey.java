@@ -8,8 +8,16 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import static java.lang.System.exit;
+
 
 public abstract class Survey {
+    public static class SurveyException extends RuntimeException {
+        public SurveyException(String message, Throwable cause) {
+            super(message, cause);
+        }
+    }
+
     protected final Scanner scanner = new Scanner(System.in);
     protected String type;
     protected String[] questions;
@@ -18,9 +26,13 @@ public abstract class Survey {
 
     protected Survey(String surveyType) {
         type = surveyType;
-        questions = parseQuestion();
-        questionLength = questions.length;
-        answers = new int[questionLength];
+        try {
+            questions = parseQuestion();
+            questionLength = questions.length;
+            answers = new int[questionLength];
+        } catch (FileNotFoundException e) {
+            throw new SurveyException("설문지 초기화 실패", e);
+        }
     }
 
     public void playSurvey() {
@@ -57,17 +69,15 @@ public abstract class Survey {
     }
 
     protected void selectSurvey() {
-        String[] questionArray = parseQuestion();
-
-        for (int i=0; i<questionLength; i++) {
-            System.out.println(i+1 + "." +questionArray[i]);
+        for (int i = 0; i < questionLength; i++) {
+            System.out.println(i + 1 + "." + questions[i]);
             int answer = getValidAnswer();
 
-            saveAnswer(i,answer);
+            saveAnswer(i, answer);
         }
     }
 
-    protected String[] parseQuestion() {
+    protected String[] parseQuestion() throws FileNotFoundException {
         try {
             Gson gson = new Gson();
             FileReader reader = new FileReader("src/surveys/types/surveys.json");
@@ -87,8 +97,7 @@ public abstract class Survey {
             return questionArray;
 
         } catch (FileNotFoundException e) {
-            System.out.println("설문 질문 데이터 읽기 실패했습니다. 관리자에게 문의해주세요.");
-            return new String[0];
+            throw new SurveyException("설문 데이터 읽기 실패", e);
         }
 
     }
