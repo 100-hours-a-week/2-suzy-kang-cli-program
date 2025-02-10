@@ -6,6 +6,8 @@ import java.util.List;
 import surveys.answer.FiveLevelAnswer;
 
 public class LoveTypeSurvey extends FiveLevelAnswer {
+    private static final int SECURE_THRESHOLD = 15;
+
     public LoveTypeSurvey(){
         super("LoveType");
     }
@@ -70,7 +72,7 @@ public class LoveTypeSurvey extends FiveLevelAnswer {
     }
 
     private boolean isSecureType(int anxious, int avoidant, int disorganized) {
-        return anxious <= 15 && avoidant <= 15 && disorganized <= 15;
+        return anxious <= SECURE_THRESHOLD && avoidant <= SECURE_THRESHOLD && disorganized <= SECURE_THRESHOLD;
     }
 
     private void displaySecureType() {

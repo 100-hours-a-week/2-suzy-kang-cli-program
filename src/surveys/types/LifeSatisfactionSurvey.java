@@ -4,6 +4,11 @@ import surveys.answer.FiveLevelAnswer;
 
 public class LifeSatisfactionSurvey extends FiveLevelAnswer {
 
+    private static final int SATISFACTION_SCORE_VERY_LOW = 20;
+    private static final int SATISFACTION_SCORE_LOW = 30;
+    private static final int SATISFACTION_SCORE_MODERATE = 40;
+    private static final int SATISFACTION_SCORE_HIGH = 45;
+
     public LifeSatisfactionSurvey(){
         super("LifeSatisfaction");
     }
@@ -25,13 +30,13 @@ public class LifeSatisfactionSurvey extends FiveLevelAnswer {
 
         int score = totalAnswerScore();
 
-        if (score <= 20) {
+        if (score <= SATISFACTION_SCORE_VERY_LOW) {
             displayVeryLowSatisfaction();
-        } else if (score <= 30) {
+        } else if (score <= SATISFACTION_SCORE_LOW) {
             displayLowSatisfaction();
-        } else if (score <= 40) {
+        } else if (score <= SATISFACTION_SCORE_MODERATE) {
             displayModerateSatisfaction();
-        } else if (score <= 45) {
+        } else if (score <= SATISFACTION_SCORE_HIGH) {
             displayHighSatisfaction();
         } else {
             displayVeryHighSatisfaction();

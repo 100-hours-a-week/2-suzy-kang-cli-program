@@ -3,6 +3,8 @@ package surveys.types;
 import surveys.answer.ThreeLevelAnswer;
 
 public class StressSurvey extends ThreeLevelAnswer {
+    private static final int STRESS_SCORE_HEALTHY = 7;
+    private static final int STRESS_SCORE_CAUTION = 11;
 
     public StressSurvey(){
         super("Stress");
@@ -25,9 +27,9 @@ public class StressSurvey extends ThreeLevelAnswer {
 
         int score = totalAnswerScore();
 
-        if (score <= 7) {
+        if (score <= STRESS_SCORE_HEALTHY) {
             displayHealthyState();
-        } else if (score <= 11) {
+        } else if (score <= STRESS_SCORE_CAUTION) {
             displayCautionState();
         } else {
             displayDangerState();
