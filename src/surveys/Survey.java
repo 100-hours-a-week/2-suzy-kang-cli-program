@@ -42,6 +42,10 @@ public abstract class Survey {
         displayResult();
     }
 
+    public int getQuestionLength() {
+        return questionLength;
+    }
+
     public abstract void displayMenu(int menuNumber);
 
     protected abstract void displayTitle();

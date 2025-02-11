@@ -56,7 +56,16 @@ public class FlowManager {
             return;
         }
 
-        surveyList.get(selectedOption-1).playSurvey();
+        Survey selectedSurvey = surveyList.get(selectedOption-1);
+
+        SurveyTimeManager timeManager = new SurveyTimeManager(selectedSurvey.getQuestionLength());
+
+        timeManager.startTimeCount();
+        selectedSurvey.playSurvey();
+        timeManager.stopTimeCount();
+
+        displayTimeResult(timeManager.getTimeResult());
+
     }
 
     public void displayEnding(){
@@ -100,6 +109,26 @@ public class FlowManager {
                 System.out.println("❌ 올바른 숫자를 입력하세요.");
             }
         }
+    }
+
+    private void displayTimeResult(SurveyTimeResult result) {
+        if(result.hasError()) {
+            System.out.println("\n⚠️ 시간을 카운트하는데 문제가 발생했습니다. ");
+            System.out.println("다음에 설문 소요 시간 알려드릴게요 !");
+            return;
+        }
+
+        System.out.println("\n⏱️ 설문 소요 시간: " + result.getFormattedTime());
+
+        if (!result.isTimeAdequate()) {
+            System.out.println("\n⚠️ 답변 시간이 매우 빠르네요!");
+            System.out.println("💡 더 신중한 답변을 하시면 더 정확한 결과를 얻을 수 있습니다.");
+            System.out.println("💭 권장 최소 시간: " + result.getRecommendedSeconds() + "초");
+        } else {
+            System.out.println("\n✨ 설문을 착실하게 답변해주셨네요!");
+            System.out.println("💝 신중한 답변 감사합니다.");
+        }
+        System.out.println();
     }
 
     private boolean isExitSelectedMenu(int selectedOption) {
